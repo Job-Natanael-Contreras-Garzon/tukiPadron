@@ -1,0 +1,110 @@
+[
+  {
+    "mesa": 183,
+    "desde": "ABAN BURLES ANGELA DAMARIS",
+    "hasta": "BANEGAS URAEZANA DENIXON",
+    "total": 300,
+    "rango_resumido": "A - BANEGAS",
+    "jurados": [
+      "AGUILAR PANIAGUA MELANIE DANAE",
+      "ANTELO CAMPOS RODRIGO SEBASTIAN",
+      "BALDERRAMA RONCALES NADHIR INES"
+    ]
+  },
+  {
+    "mesa": 184,
+    "desde": "BAPTISTA CHAVEZ MARCOS DAVID",
+    "hasta": "CHOQUE SUBELZA ANA IBETH",
+    "total": 300,
+    "rango_resumido": "BAPTISTA - CHOQUE (SUBELZA)",
+    "jurados": [
+      "CAMPOS BALLESTEROS IVAN",
+      "CAYO ESCALERA MARIA STHEFANY",
+      "CHUMACERO COPA MARY LUZ"
+    ]
+  },
+  {
+    "mesa": 185,
+    "desde": "CHOQUE ZEGARRA ELVIZ",
+    "hasta": "GARCIA ESCOBAR ALEJANDRA FABIOLA",
+    "total": 295,
+    "rango_resumido": "CHOQUE (ZEGARRA) - GARCIA (ESCOBAR)",
+    "jurados": [
+      "CUELLAR MORENO ROGER JESUS",
+      "ESPINOZA PADILLA MELANI",
+      "GARCIA ESCOBAR ALEJANDRA FABIOLA"
+    ]
+  },
+  {
+    "mesa": 186,
+    "desde": "GARCIA LA FUENTE PAMELA",
+    "hasta": "JIMENEZ PARRAGA ALEN",
+    "total": 295,
+    "rango_resumido": "GARCIA (LA FUENTE) - JIMENEZ (PARRAGA)",
+    "jurados": [
+      "GARCIA VEDIA JOSUE",
+      "GONZALES HINOJOSA AYNARA",
+      "JIMENEZ PARRAGA ALEN"
+    ]
+  },
+  {
+    "mesa": 187,
+    "desde": "JIMENEZ RALDES MARIA JOSE",
+    "hasta": "MORON PANIAGUA JUAN EDIL",
+    "total": 285,
+    "rango_resumido": "JIMENEZ (RALDES) - MORON (PANIAGUA)",
+    "jurados": [
+      "MANSILLA NUÑEZ YOISSY MARIANA",
+      "MENDEZ GARCIA MIGUEL ANGEL",
+      "MORON PANIAGUA JUAN EDIL"
+    ]
+  },
+  {
+    "mesa": 188,
+    "desde": "MORON PEREZ YENNIFER ANGHELYNE",
+    "hasta": "RAMIREZ JIMENEZ OLIVER",
+    "total": 355,
+    "rango_resumido": "MORON (PEREZ) - RAMIREZ (JIMENEZ)",
+    "jurados": [
+      "OCAMPO OCAMPO MIGUEL ANGEL",
+      "PEREIRA RODRIGUEZ PAOLA MIRNA",
+      "RAMIREZ JIMENEZ OLIVER"
+    ]
+  },
+  {
+    "mesa": 189,
+    "desde": "RAMIREZ SALINAS GERALDINE",
+    "hasta": "SANCHEZ ANZIETA CAMILA",
+    "total": 235,
+    "rango_resumido": "RAMIREZ (SALINAS) - SANCHEZ (ANZIETA)",
+    "jurados": [
+      "RODRIGUEZ TRUJILLO AINHOA",
+      "ROMAN HURTADO ADRIANA JESUS",
+      "SANCHEZ ANZIETA CAMILA"
+    ]
+  },
+  {
+    "mesa": 190,
+    "desde": "SANCHEZ DAVALOS AIDA CELESTE",
+    "hasta": "VERASTEGUI MARAÑON ANGELA MAYTE",
+    "total": 330,
+    "rango_resumido": "SANCHEZ (DAVALOS) - VERASTEGUI",
+    "jurados": [
+      "SOLIZ MARTINEZ MARCO ANTONIO",
+      "SUAREZ ZABALA CAROLINA",
+      "VERASTEGUI MARAÑON ANGELA MAYTE"
+    ]
+  },
+  {
+    "mesa": 191,
+    "desde": "VERDUGUEZ AGUILERA LUIS FERNANDO",
+    "hasta": "ZURITA QUIMAYA NELVA ESMERALDA",
+    "total": 89,
+    "rango_resumido": "VERDUGUEZ - ZURITA",
+    "jurados": [
+      "VILLCA ALMENDRAS JHONATHAN FERNANDO",
+      "VILLCA RIOS ALIZON MARINA",
+      "ZURITA QUIMAYA NELVA ESMERALDA"
+    ]
+  }
+]

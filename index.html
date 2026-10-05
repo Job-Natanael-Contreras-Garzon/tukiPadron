@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Padrón Unidad Veterinaria 2024-2026</title>
+  <meta name="description" content="Consultor rápido y offline de mesas de votación y jurados electorales para Ciencias Veterinarias UAGRM">
+  <meta name="theme-color" content="#31A6CA">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body class="bg-[#F1F8FA] min-h-screen text-[#040304] flex flex-col font-sans">
+
+  <!-- Header Superior Fijo -->
+  <header class="sticky top-0 z-40 bg-[#31A6CA] text-white shadow-md">
+    <div class="max-w-md mx-auto px-4 h-16 flex items-center justify-between">
+      <button id="btn-back" class="p-2 -ml-2 rounded-full hover:bg-white/20 active:scale-95 transition-all text-white flex items-center justify-center" aria-label="Volver atrás o reiniciar búsqueda">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+      </button>
+
+      <div class="flex-1 text-center px-2">
+        <h1 class="text-sm font-extrabold tracking-wide uppercase leading-tight line-clamp-1">
+          Unidad Veterinaria
+        </h1>
+        <p class="text-[11px] text-white/90 font-medium">Gestión 2024 - 2026</p>
+      </div>
+
+      <div class="flex items-center gap-1.5">
+        <span id="offline-badge" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-white/20 text-white backdrop-blur-sm">
+          <span class="w-2 h-2 rounded-full bg-emerald-300 animate-pulse"></span>
+          <span>Online</span>
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenedor Principal (Mobile-First max-w-md) -->
+  <main class="flex-1 w-full max-w-md mx-auto px-4 py-4 flex flex-col space-y-5">
+
+    <!-- Hero Carrusel (10 slides WebP) -->
+    <section id="hero-section" class="relative overflow-hidden rounded-2xl shadow-lg bg-gradient-to-br from-[#31A6CA] to-[#35A9C6] aspect-[16/9] select-none">
+      <div id="carousel-track" class="flex h-full transition-transform duration-500 ease-out will-change-transform">
+        <!-- Slides generados dinámicamente -->
+      </div>
+
+      <!-- Controles Carrusel -->
+      <div class="absolute bottom-2.5 inset-x-0 flex justify-center items-center gap-1.5 z-10" id="carousel-dots">
+        <!-- Dots indicadores -->
+      </div>
+
+      <button id="carousel-prev" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/30 text-white flex items-center justify-center active:scale-90 transition-all opacity-80 hover:opacity-100" aria-label="Anterior slide">
+        ‹
+      </button>
+      <button id="carousel-next" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/30 text-white flex items-center justify-center active:scale-90 transition-all opacity-80 hover:opacity-100" aria-label="Siguiente slide">
+        ›
+      </button>
+    </section>
+
+    <!-- Sección de Consulta: ¿No sabes dónde Votar? -->
+    <section class="bg-white rounded-3xl p-5 shadow-sm border border-[#31A6CA]/20">
+      <div class="text-center mb-4">
+        <span class="inline-block p-2 rounded-2xl bg-[#31A6CA]/10 text-[#31A6CA] mb-1.5">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </span>
+        <h2 class="text-xl font-extrabold text-[#040304]">¿No sabes dónde Votar?</h2>
+        <p class="text-xs text-slate-500 mt-1">Introduce tu Registro o Nombre completo para consultar tu mesa y jurado</p>
+      </div>
+
+      <!-- Formulario de Búsqueda -->
+      <form id="search-form" class="space-y-3" onsubmit="return false;">
+        <div class="relative">
+          <input
+            type="text"
+            id="search-input"
+            class="w-full bg-[#F8FAFC] border-2 border-slate-200 focus:border-[#31A6CA] rounded-2xl py-3.5 pl-11 pr-10 text-sm font-semibold tracking-wide placeholder:text-slate-400 focus:outline-none transition-all"
+            placeholder="Ej. 226207064 o Aguilar Melanie"
+            autocomplete="off"
+            autocorrect="off"
+            spellcheck="false"
+          />
+          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <button
+            type="button"
+            id="btn-clear"
+            class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 hidden"
+            aria-label="Limpiar campo de búsqueda"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+            </svg>
+          </button>
+        </div>
+
+        <button
+          type="submit"
+          id="btn-search"
+          class="w-full bg-[#EC7D17] hover:bg-[#d66e11] active:scale-[0.98] text-white font-extrabold py-3.5 rounded-2xl shadow-orange transition-all flex items-center justify-center gap-2 text-base"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <span>Buscar</span>
+        </button>
+      </form>
+    </section>
+
+    <!-- Contenedor de Loader (< 1s) -->
+    <div id="loader-view" class="hidden bg-white rounded-3xl p-8 text-center border border-[#31A6CA]/20 shadow-sm animate-fade-in-scale">
+      <div class="relative w-16 h-16 mx-auto mb-3 flex items-center justify-center">
+        <div class="absolute inset-0 rounded-full border-4 border-[#31A6CA]/20 border-t-[#EC7D17] animate-spin"></div>
+        <!-- Ícono de Huella / Mascota -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-[#31A6CA]" viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="12" cy="14" r="4" />
+          <circle cx="6.5" cy="8.5" r="2.5" />
+          <circle cx="17.5" cy="8.5" r="2.5" />
+          <circle cx="12" cy="5.5" r="2.5" />
+        </svg>
+      </div>
+      <p class="text-sm font-bold text-[#040304]">Consultando el padrón oficial...</p>
+      <p class="text-xs text-slate-400 mt-1">Verificando mesa y jurados electorales</p>
+    </div>
+
+    <!-- Contenedor de Resultado Único Positivo -->
+    <div id="result-view" class="hidden space-y-4 animate-fade-in-scale">
+      <!-- Tarjeta de Resultado -->
+      <article class="bg-white rounded-3xl p-5 shadow-brand border border-[#31A6CA]/30 overflow-hidden relative">
+        
+        <!-- Banner Condicional de Jurado Electoral -->
+        <div id="jurado-banner" class="mb-4 rounded-2xl p-3.5 flex items-center gap-3">
+          <!-- Dinámico: Verde/Naranja si es jurado, Suave si no es jurado -->
+        </div>
+
+        <!-- Badge Gigante de Mesa -->
+        <div class="text-center py-4 bg-gradient-to-br from-[#31A6CA]/10 via-[#35A9C6]/15 to-transparent rounded-2xl border border-[#31A6CA]/20 mb-4">
+          <span class="text-xs font-bold uppercase tracking-wider text-[#31A6CA]">Lugar de Votación</span>
+          <div id="res-mesa" class="text-4xl font-black text-[#EC7D17] tracking-tight mt-0.5">
+            MESA 183
+          </div>
+          <span class="text-[11px] font-semibold text-slate-500">Facultad de Ciencias Veterinarias</span>
+        </div>
+
+        <!-- Datos del Votante -->
+        <div class="space-y-3 divide-y divide-slate-100 text-xs">
+          <div class="pt-1">
+            <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Nombre Completo</span>
+            <p id="res-nombre" class="text-sm font-extrabold text-[#040304] mt-0.5 uppercase"></p>
+          </div>
+
+          <div class="pt-2 flex justify-between items-center">
+            <div>
+              <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Registro Universitario</span>
+              <p id="res-registro" class="text-sm font-black text-[#31A6CA] mt-0.5"></p>
+            </div>
+            <div class="text-right">
+              <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Carrera</span>
+              <p class="text-xs font-bold text-slate-700 mt-0.5">Medicina Veterinaria</p>
+            </div>
+          </div>
+
+          <!-- Habilitaciones Electorales (Centro Interno, ICU, FUL) -->
+          <div class="pt-2">
+            <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Habilitaciones para Votar</span>
+            <div class="grid grid-cols-3 gap-2" id="res-habilitaciones">
+              <!-- Centro Interno, ICU, FUL -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Botón Nueva Consulta -->
+        <div class="mt-5 pt-3 border-t border-slate-100">
+          <button
+            type="button"
+            id="btn-new-search"
+            class="w-full bg-[#31A6CA] hover:bg-[#288ea9] active:scale-[0.98] text-white font-extrabold py-3.5 rounded-2xl shadow-brand transition-all flex items-center justify-center gap-2 text-sm"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            <span>Nueva Consulta</span>
+          </button>
+        </div>
+      </article>
+    </div>
+
+    <!-- Contenedor de Múltiples Coincidencias (Desambiguación) -->
+    <div id="multiple-view" class="hidden bg-white rounded-3xl p-5 shadow-sm border border-[#31A6CA]/20 space-y-3 animate-fade-in-scale">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+        <div>
+          <h3 class="text-sm font-extrabold text-[#040304]">Coincidencias Encontradas</h3>
+          <p class="text-xs text-slate-400">Selecciona tu nombre de la lista:</p>
+        </div>
+        <span id="multi-count" class="px-2.5 py-1 rounded-full text-xs font-black bg-[#EC7D17]/10 text-[#EC7D17]">
+          0
+        </span>
+      </div>
+
+      <div id="multi-list" class="space-y-2 max-h-72 overflow-y-auto pr-1">
+        <!-- Tarjetas de selección -->
+      </div>
+    </div>
+
+    <!-- Contenedor No Encontrado -->
+    <div id="notfound-view" class="hidden bg-white rounded-3xl p-6 text-center border border-red-200 shadow-sm animate-fade-in-scale">
+      <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-red-50 text-red-500 flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+      </div>
+      <h3 class="text-base font-extrabold text-[#040304]">Registro no encontrado</h3>
+      <p id="notfound-query" class="text-xs text-slate-500 mt-1">No se encontró ningún estudiante con esa información.</p>
+      
+      <div class="mt-4 p-3 bg-slate-50 rounded-xl text-left text-xs text-slate-600 space-y-1">
+        <p class="font-bold text-[#040304]">Consejos útiles:</p>
+        <p>• Si buscas por registro, verifica los dígitos ingresados.</p>
+        <p>• Si buscas por nombre, intenta escribir solo tu primer apellido.</p>
+        <p>• El padrón corresponde a la Facultad de Ciencias Veterinarias.</p>
+      </div>
+
+      <button
+        type="button"
+        id="btn-retry"
+        class="mt-4 w-full bg-slate-100 hover:bg-slate-200 text-[#040304] font-bold py-2.5 rounded-xl transition-all text-xs"
+      >
+        Intentar otra búsqueda
+      </button>
+    </div>
+
+    <!-- Acordeón Informativo de Distribución de Mesas (183 a 191) -->
+    <section class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+      <button
+        type="button"
+        id="accordion-toggle"
+        class="w-full p-4 flex items-center justify-between text-left hover:bg-slate-50 transition-colors"
+      >
+        <div class="flex items-center gap-2.5">
+          <span class="w-7 h-7 rounded-lg bg-[#31A6CA]/10 text-[#31A6CA] flex items-center justify-center text-xs font-bold">
+            📋
+          </span>
+          <div>
+            <h3 class="text-xs font-extrabold text-[#040304]">Distribución Oficial de Mesas</h3>
+            <p class="text-[11px] text-slate-400">Ver los rangos de apellidos de las Mesas 183 a 191</p>
+          </div>
+        </div>
+        <svg id="accordion-arrow" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-slate-400 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+      </button>
+
+      <div id="accordion-content" class="hidden border-t border-slate-100 p-4 space-y-2.5 text-xs bg-slate-50/50">
+        <p class="text-[11px] text-slate-500 font-medium">
+          Distribución paritaria oficial de 2,484 estudiantes de Medicina Veterinaria y Zootecnia:
+        </p>
+        <div id="mesas-table-container" class="space-y-2">
+          <!-- Generado dinámicamente -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer Institucional -->
+  <footer class="mt-auto py-5 text-center text-xs text-slate-400">
+    <p class="font-semibold text-slate-500">Unidad Veterinaria · Gestión 2024 - 2026</p>
+    <p class="text-[11px] mt-0.5">UAGRM — Santa Cruz de la Sierra</p>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
