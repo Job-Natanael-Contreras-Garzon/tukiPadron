@@ -1,4 +1,4 @@
-import { searchVoters, getVoterByRegistro } from './searchEngine.js'
+import { searchVoters } from './searchEngine.js'
 import mesasInfo from './data/mesas_info.json'
 
 // --- 1. Inicialización de Service Worker & Estado Offline ---
@@ -12,13 +12,13 @@ function initServiceWorker() {
         <span class="w-2 h-2 rounded-full bg-emerald-300 animate-pulse"></span>
         <span>Online</span>
       `
-      badge.className = 'inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-white/20 text-white backdrop-blur-sm'
+      badge.className = 'inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-white/20 text-white backdrop-blur-sm'
     } else {
       badge.innerHTML = `
         <span class="w-2 h-2 rounded-full bg-[#EC7D17]"></span>
         <span>⚡ Offline</span>
       `
-      badge.className = 'inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#EC7D17] text-white shadow-sm'
+      badge.className = 'inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#EC7D17] text-white shadow-sm'
     }
   }
 
@@ -29,7 +29,7 @@ function initServiceWorker() {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('/sw.js').then((reg) => {
-        console.log('Service Worker registrado con éxito:', reg.scope)
+        console.log('Service Worker registrado:', reg.scope)
       }).catch((err) => {
         console.warn('Error al registrar Service Worker:', err)
       })
@@ -49,7 +49,6 @@ function initCarousel() {
   let currentSlide = 0
   let autoplayTimer = null
 
-  // Construir los 10 slides
   track.innerHTML = ''
   dotsContainer.innerHTML = ''
 
@@ -102,7 +101,6 @@ function initCarousel() {
   prevBtn?.addEventListener('click', prevSlide)
   nextBtn?.addEventListener('click', nextSlide)
 
-  // Autoplay cada 4.5 segundos
   function startAutoplay() {
     autoplayTimer = setInterval(nextSlide, 4500)
   }
@@ -114,7 +112,7 @@ function initCarousel() {
 
   startAutoplay()
 
-  // Soporte para gestos táctiles (Swipe móvil)
+  // Soporte para gestos táctiles (Swipe)
   let touchStartX = 0
   let touchEndX = 0
 
@@ -132,20 +130,27 @@ function initCarousel() {
   }, { passive: true })
 }
 
-// --- 3. Lógica de Consulta y Motor de Búsqueda ---
-function initSearch() {
+// --- 3. Flujo de Navegación entre Pantallas Móviles ---
+function initScreens() {
+  const appHeader = document.getElementById('app-header')
+  const screenHome = document.getElementById('screen-home')
+  const screenResult = document.getElementById('screen-result')
+
   const form = document.getElementById('search-form')
   const input = document.getElementById('search-input')
   const clearBtn = document.getElementById('btn-clear')
+
   const loaderView = document.getElementById('loader-view')
-  const resultView = document.getElementById('result-view')
-  const multipleView = document.getElementById('multiple-view')
-  const notfoundView = document.getElementById('notfound-view')
+  const singleCard = document.getElementById('single-result-card')
+  const multiCard = document.getElementById('multiple-result-card')
+  const notfoundCard = document.getElementById('notfound-result-card')
+
   const btnBack = document.getElementById('btn-back')
   const btnNewSearch = document.getElementById('btn-new-search')
+  const btnBackMulti = document.getElementById('btn-back-multi')
   const btnRetry = document.getElementById('btn-retry')
 
-  // Control del botón de limpiar texto
+  // Control del botón limpiar texto
   input?.addEventListener('input', () => {
     if (input.value.trim().length > 0) {
       clearBtn?.classList.remove('hidden')
@@ -160,31 +165,56 @@ function initSearch() {
     input.focus()
   })
 
-  function hideAllViews() {
-    loaderView?.classList.add('hidden')
-    resultView?.classList.add('hidden')
-    multipleView?.classList.add('hidden')
-    notfoundView?.classList.add('hidden')
-  }
+  /**
+   * Transición hacia Pantalla 1: Home (Cabecera oculta)
+   */
+  function showHomeScreen() {
+    // 1. Ocultar pantalla de respuesta y cabecera
+    screenResult?.classList.add('hidden')
+    appHeader?.classList.add('hidden')
 
-  function resetToSearch() {
-    hideAllViews()
+    // 2. Mostrar pantalla de consulta con transición
+    screenHome?.classList.remove('hidden', 'animate-slide-in-right')
+    screenHome?.classList.add('animate-slide-in-left')
+
+    // 3. Resetear foco y limpiar
     if (input) {
       input.value = ''
       clearBtn?.classList.add('hidden')
       input.focus()
-      window.scrollTo({ top: 0, behavior: 'smooth' })
     }
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  btnBack?.addEventListener('click', resetToSearch)
-  btnNewSearch?.addEventListener('click', resetToSearch)
-  btnRetry?.addEventListener('click', () => {
-    hideAllViews()
-    input?.focus()
-  })
+  /**
+   * Transición hacia Pantalla 2: Respuesta (Cabecera visible)
+   */
+  function showResultScreen() {
+    // 1. Ocultar pantalla home
+    screenHome?.classList.add('hidden')
 
-  function handleSearch() {
+    // 2. Mostrar cabecera superior y pantalla de respuesta
+    appHeader?.classList.remove('hidden')
+    screenResult?.classList.remove('hidden', 'animate-slide-in-left')
+    screenResult?.classList.add('animate-slide-in-right')
+
+    // 3. Preparar estado de loader
+    singleCard?.classList.add('hidden')
+    multiCard?.classList.add('hidden')
+    notfoundCard?.classList.add('hidden')
+    loaderView?.classList.remove('hidden')
+
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  // Eventos de retorno a la pantalla inicial
+  btnBack?.addEventListener('click', showHomeScreen)
+  btnNewSearch?.addEventListener('click', showHomeScreen)
+  btnBackMulti?.addEventListener('click', showHomeScreen)
+  btnRetry?.addEventListener('click', showHomeScreen)
+
+  // Ejecutar búsqueda al enviar formulario
+  async function handleSearch() {
     const rawVal = input?.value.trim()
     if (!rawVal) {
       input?.focus()
@@ -193,21 +223,26 @@ function initSearch() {
       return
     }
 
-    hideAllViews()
-    loaderView?.classList.remove('hidden')
-    loaderView?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+    // Cambiar inmediatamente a la vista de respuesta (estilo pantalla móvil)
+    showResultScreen()
 
-    // Micro-loader visual controlado de ~350ms para UX
-    setTimeout(() => {
-      const outcome = searchVoters(rawVal)
-      loaderView?.classList.add('hidden')
+    // Micro-loader controlado de ~350ms para retroalimentación deliberada de UX
+    setTimeout(async () => {
+      try {
+        const outcome = await searchVoters(rawVal)
+        loaderView?.classList.add('hidden')
 
-      if (outcome.type === 'single') {
-        renderSingle(outcome.result)
-      } else if (outcome.type === 'multiple') {
-        renderMultiple(outcome.results, outcome.total, outcome.query)
-      } else {
-        renderNotFound(outcome.query || rawVal)
+        if (outcome.type === 'single') {
+          renderSingleResult(outcome.result)
+        } else if (outcome.type === 'multiple') {
+          renderMultipleResults(outcome.results, outcome.total, outcome.query)
+        } else {
+          renderNotFoundResult(outcome.query || rawVal)
+        }
+      } catch (err) {
+        console.error('Error en búsqueda:', err)
+        loaderView?.classList.add('hidden')
+        renderNotFoundResult(rawVal)
       }
     }, 350)
   }
@@ -218,9 +253,8 @@ function initSearch() {
   })
 
   // Renderizar resultado único positivo
-  function renderSingle(voter) {
-    hideAllViews()
-    resultView?.classList.remove('hidden')
+  function renderSingleResult(voter) {
+    singleCard?.classList.remove('hidden')
 
     // 1. Banner de Jurado Electoral
     const banner = document.getElementById('jurado-banner')
@@ -254,9 +288,7 @@ function initSearch() {
 
     // 2. Mesa
     const mesaEl = document.getElementById('res-mesa')
-    if (mesaEl) {
-      mesaEl.textContent = `MESA ${voter.mesa || '183'}`
-    }
+    if (mesaEl) mesaEl.textContent = `MESA ${voter.mesa || '183'}`
 
     // 3. Nombre y Registro
     const nombreEl = document.getElementById('res-nombre')
@@ -289,14 +321,11 @@ function initSearch() {
         </div>
       `
     }
-
-    resultView?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
   }
 
   // Renderizar múltiples coincidencias (Desambiguación)
-  function renderMultiple(list, total, query) {
-    hideAllViews()
-    multipleView?.classList.remove('hidden')
+  function renderMultipleResults(list, total, query) {
+    multiCard?.classList.remove('hidden')
 
     const countEl = document.getElementById('multi-count')
     if (countEl) countEl.textContent = `${total} estudiantes`
@@ -324,24 +353,21 @@ function initSearch() {
           </div>
         `
         itemBtn.addEventListener('click', () => {
-          renderSingle(v)
+          multiCard?.classList.add('hidden')
+          renderSingleResult(v)
         })
         listEl.appendChild(itemBtn)
       })
     }
-
-    multipleView?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
   }
 
   // Renderizar no encontrado
-  function renderNotFound(q) {
-    hideAllViews()
-    notfoundView?.classList.remove('hidden')
+  function renderNotFoundResult(q) {
+    notfoundCard?.classList.remove('hidden')
     const queryEl = document.getElementById('notfound-query')
     if (queryEl) {
       queryEl.textContent = `No encontramos a ningún estudiante con "${q}" en el padrón.`
     }
-    notfoundView?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
   }
 }
 
@@ -365,7 +391,6 @@ function initAccordion() {
     }
   })
 
-  // Renderizar las 9 mesas
   if (container && mesasInfo) {
     container.innerHTML = ''
     mesasInfo.forEach((m) => {
@@ -392,10 +417,9 @@ function initAccordion() {
   }
 }
 
-// Iniciar aplicación
 document.addEventListener('DOMContentLoaded', () => {
   initServiceWorker()
   initCarousel()
-  initSearch()
+  initScreens()
   initAccordion()
 })

@@ -8,12 +8,34 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-brand-bg text-brand-dark antialiased selection:bg-brand-orange selection:text-white font-sans;
+    @apply bg-[#F1F8FA] text-[#040304] antialiased selection:bg-[#EC7D17] selection:text-white font-sans;
     min-height: 100vh;
   }
 }
 
-/* Animaciones y utilidades de transición */
+/* Transiciones estilo pantallas de app nativa móvil */
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 @keyframes fadeInScale {
   from {
     opacity: 0;
@@ -25,16 +47,24 @@
   }
 }
 
+.animate-slide-in-right {
+  animation: slideInFromRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInFromLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 .animate-fade-in-scale {
   animation: fadeInScale 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes pulseGlow {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(49, 166, 202, 0.4);
+    box-shadow: 0 0 0 0 rgba(236, 125, 23, 0.4);
   }
   50% {
-    box-shadow: 0 0 0 12px rgba(49, 166, 202, 0);
+    box-shadow: 0 0 0 10px rgba(236, 125, 23, 0);
   }
 }
 
@@ -42,7 +72,7 @@
   animation: pulseGlow 1.8s infinite;
 }
 
-/* Ocultar barra de desplazamiento manteniendo funcionalidad */
+/* Ocultar scrollbar en elementos horizontales y listas */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }

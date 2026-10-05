@@ -11,12 +11,12 @@
   <link rel="apple-touch-icon" href="/icons/icon-192.png">
   <link rel="stylesheet" href="/src/style.css">
 </head>
-<body class="bg-[#F1F8FA] min-h-screen text-[#040304] flex flex-col font-sans">
+<body class="bg-[#F1F8FA] min-h-screen text-[#040304] flex flex-col font-sans overflow-x-hidden">
 
-  <!-- Header Superior Fijo -->
-  <header class="sticky top-0 z-40 bg-[#31A6CA] text-white shadow-md">
+  <!-- Header Superior (Inicialmente OCULTO, aparece únicamente en la pantalla de respuesta) -->
+  <header id="app-header" class="hidden sticky top-0 z-50 bg-[#31A6CA] text-white shadow-md transition-all duration-300">
     <div class="max-w-md mx-auto px-4 h-16 flex items-center justify-between">
-      <button id="btn-back" class="p-2 -ml-2 rounded-full hover:bg-white/20 active:scale-95 transition-all text-white flex items-center justify-center" aria-label="Volver atrás o reiniciar búsqueda">
+      <button id="btn-back" class="p-2 -ml-2 rounded-full hover:bg-white/20 active:scale-90 transition-all text-white flex items-center justify-center" aria-label="Volver atrás a la pantalla de búsqueda">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
@@ -24,13 +24,13 @@
 
       <div class="flex-1 text-center px-2">
         <h1 class="text-sm font-extrabold tracking-wide uppercase leading-tight line-clamp-1">
-          Unidad Veterinaria
+          Padrón Unidad Veterinaria
         </h1>
         <p class="text-[11px] text-white/90 font-medium">Gestión 2024 - 2026</p>
       </div>
 
       <div class="flex items-center gap-1.5">
-        <span id="offline-badge" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-white/20 text-white backdrop-blur-sm">
+        <span id="offline-badge" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-white/20 text-white backdrop-blur-sm">
           <span class="w-2 h-2 rounded-full bg-emerald-300 animate-pulse"></span>
           <span>Online</span>
         </span>
@@ -38,8 +38,23 @@
     </div>
   </header>
 
-  <!-- Contenedor Principal (Mobile-First max-w-md) -->
-  <main class="flex-1 w-full max-w-md mx-auto px-4 py-4 flex flex-col space-y-5">
+  <!-- PANTALLA 1: INICIO Y CONSULTA (Header oculto al inicio) -->
+  <div id="screen-home" class="screen-view w-full max-w-md mx-auto px-4 py-4 flex flex-col space-y-5 transition-all duration-300">
+
+    <!-- Badge / Mini Banner de bienvenida superior -->
+    <div class="flex items-center justify-between pt-1 pb-0.5">
+      <div class="flex items-center gap-2">
+        <img src="/images/logo1.webp" alt="Logo Unidad Veterinaria" class="w-8 h-8 rounded-full shadow-xs object-cover border border-[#31A6CA]/30" />
+        <div>
+          <span class="block text-xs font-black text-[#31A6CA] tracking-wide uppercase">Unidad Veterinaria</span>
+          <span class="block text-[10px] text-slate-500 font-medium">Padrón Electoral 2024-2026</span>
+        </div>
+      </div>
+      <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#31A6CA]/10 text-[#31A6CA]">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#31A6CA]"></span>
+        UAGRM
+      </span>
+    </div>
 
     <!-- Hero Carrusel (10 slides WebP) -->
     <section id="hero-section" class="relative overflow-hidden rounded-2xl shadow-lg bg-gradient-to-br from-[#31A6CA] to-[#35A9C6] aspect-[16/9] select-none">
@@ -115,8 +130,51 @@
       </form>
     </section>
 
-    <!-- Contenedor de Loader (< 1s) -->
-    <div id="loader-view" class="hidden bg-white rounded-3xl p-8 text-center border border-[#31A6CA]/20 shadow-sm animate-fade-in-scale">
+    <!-- Acordeón Informativo de Distribución de Mesas (183 a 191) -->
+    <section class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+      <button
+        type="button"
+        id="accordion-toggle"
+        class="w-full p-4 flex items-center justify-between text-left hover:bg-slate-50 transition-colors"
+      >
+        <div class="flex items-center gap-2.5">
+          <span class="w-7 h-7 rounded-lg bg-[#31A6CA]/10 text-[#31A6CA] flex items-center justify-center text-xs font-bold">
+            📋
+          </span>
+          <div>
+            <h3 class="text-xs font-extrabold text-[#040304]">Distribución Oficial de Mesas</h3>
+            <p class="text-[11px] text-slate-400">Ver los rangos de apellidos de las Mesas 183 a 191</p>
+          </div>
+        </div>
+        <svg id="accordion-arrow" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-slate-400 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+      </button>
+
+      <div id="accordion-content" class="hidden border-t border-slate-100 p-4 space-y-2.5 text-xs bg-slate-50/50">
+        <p class="text-[11px] text-slate-500 font-medium">
+          Distribución paritaria oficial de 2,484 estudiantes de Medicina Veterinaria y Zootecnia:
+        </p>
+        <div id="mesas-table-container" class="space-y-2">
+          <!-- Generado dinámicamente -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Institucional de la Pantalla Principal -->
+    <footer class="mt-auto py-4 text-center text-xs text-slate-400">
+      <p class="font-semibold text-slate-500">Unidad Veterinaria · Gestión 2024 - 2026</p>
+      <p class="text-[11px] mt-0.5">UAGRM — Santa Cruz de la Sierra</p>
+    </footer>
+
+  </div>
+
+
+  <!-- PANTALLA 2: RESPUESTA EXCLUSIVA (Se activa al buscar, con Cabecera activa) -->
+  <div id="screen-result" class="screen-view hidden w-full max-w-md mx-auto px-4 py-4 flex flex-col space-y-4 transition-all duration-300">
+
+    <!-- Loader de transición entre pantallas (< 1s) -->
+    <div id="loader-view" class="bg-white rounded-3xl p-8 text-center border border-[#31A6CA]/20 shadow-sm animate-fade-in-scale">
       <div class="relative w-16 h-16 mx-auto mb-3 flex items-center justify-center">
         <div class="absolute inset-0 rounded-full border-4 border-[#31A6CA]/20 border-t-[#EC7D17] animate-spin"></div>
         <!-- Ícono de Huella / Mascota -->
@@ -131,9 +189,8 @@
       <p class="text-xs text-slate-400 mt-1">Verificando mesa y jurados electorales</p>
     </div>
 
-    <!-- Contenedor de Resultado Único Positivo -->
-    <div id="result-view" class="hidden space-y-4 animate-fade-in-scale">
-      <!-- Tarjeta de Resultado -->
+    <!-- Vista de Resultado Único Positivo -->
+    <div id="single-result-card" class="hidden animate-fade-in-scale">
       <article class="bg-white rounded-3xl p-5 shadow-brand border border-[#31A6CA]/30 overflow-hidden relative">
         
         <!-- Banner Condicional de Jurado Electoral -->
@@ -193,8 +250,8 @@
       </article>
     </div>
 
-    <!-- Contenedor de Múltiples Coincidencias (Desambiguación) -->
-    <div id="multiple-view" class="hidden bg-white rounded-3xl p-5 shadow-sm border border-[#31A6CA]/20 space-y-3 animate-fade-in-scale">
+    <!-- Vista de Múltiples Coincidencias (Desambiguación) -->
+    <div id="multiple-result-card" class="hidden bg-white rounded-3xl p-5 shadow-sm border border-[#31A6CA]/20 space-y-3 animate-fade-in-scale">
       <div class="flex items-center justify-between pb-2 border-b border-slate-100">
         <div>
           <h3 class="text-sm font-extrabold text-[#040304]">Coincidencias Encontradas</h3>
@@ -205,13 +262,23 @@
         </span>
       </div>
 
-      <div id="multi-list" class="space-y-2 max-h-72 overflow-y-auto pr-1">
-        <!-- Tarjetas de selección -->
+      <div id="multi-list" class="space-y-2 max-h-96 overflow-y-auto pr-1">
+        <!-- Tarjetas de selección rápida con tap -->
+      </div>
+
+      <div class="pt-2 border-t border-slate-100">
+        <button
+          type="button"
+          id="btn-back-multi"
+          class="w-full bg-slate-100 hover:bg-slate-200 text-[#040304] font-bold py-3 rounded-2xl transition-all text-xs"
+        >
+          Volver a buscar
+        </button>
       </div>
     </div>
 
-    <!-- Contenedor No Encontrado -->
-    <div id="notfound-view" class="hidden bg-white rounded-3xl p-6 text-center border border-red-200 shadow-sm animate-fade-in-scale">
+    <!-- Vista de No Encontrado -->
+    <div id="notfound-result-card" class="hidden bg-white rounded-3xl p-6 text-center border border-red-200 shadow-sm animate-fade-in-scale">
       <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-red-50 text-red-500 flex items-center justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -230,50 +297,18 @@
       <button
         type="button"
         id="btn-retry"
-        class="mt-4 w-full bg-slate-100 hover:bg-slate-200 text-[#040304] font-bold py-2.5 rounded-xl transition-all text-xs"
+        class="mt-4 w-full bg-[#31A6CA] hover:bg-[#288ea9] text-white font-bold py-3 rounded-2xl shadow-sm transition-all text-xs"
       >
-        Intentar otra búsqueda
+        Intentar otra consulta
       </button>
     </div>
 
-    <!-- Acordeón Informativo de Distribución de Mesas (183 a 191) -->
-    <section class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-      <button
-        type="button"
-        id="accordion-toggle"
-        class="w-full p-4 flex items-center justify-between text-left hover:bg-slate-50 transition-colors"
-      >
-        <div class="flex items-center gap-2.5">
-          <span class="w-7 h-7 rounded-lg bg-[#31A6CA]/10 text-[#31A6CA] flex items-center justify-center text-xs font-bold">
-            📋
-          </span>
-          <div>
-            <h3 class="text-xs font-extrabold text-[#040304]">Distribución Oficial de Mesas</h3>
-            <p class="text-[11px] text-slate-400">Ver los rangos de apellidos de las Mesas 183 a 191</p>
-          </div>
-        </div>
-        <svg id="accordion-arrow" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-slate-400 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-        </svg>
-      </button>
+    <!-- Footer de Pantalla de Respuesta -->
+    <footer class="mt-auto py-4 text-center text-xs text-slate-400">
+      <p class="font-semibold text-slate-500">Unidad Veterinaria · Gestión 2024 - 2026</p>
+    </footer>
 
-      <div id="accordion-content" class="hidden border-t border-slate-100 p-4 space-y-2.5 text-xs bg-slate-50/50">
-        <p class="text-[11px] text-slate-500 font-medium">
-          Distribución paritaria oficial de 2,484 estudiantes de Medicina Veterinaria y Zootecnia:
-        </p>
-        <div id="mesas-table-container" class="space-y-2">
-          <!-- Generado dinámicamente -->
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Footer Institucional -->
-  <footer class="mt-auto py-5 text-center text-xs text-slate-400">
-    <p class="font-semibold text-slate-500">Unidad Veterinaria · Gestión 2024 - 2026</p>
-    <p class="text-[11px] mt-0.5">UAGRM — Santa Cruz de la Sierra</p>
-  </footer>
+  </div>
 
   <script type="module" src="/src/main.js"></script>
 </body>
