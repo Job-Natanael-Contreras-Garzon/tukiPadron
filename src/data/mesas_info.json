@@ -1,6 +1,9 @@
 [
   {
     "mesa": 183,
+    "sede": "SANTA CRUZ",
+    "recinto": "MOD 228",
+    "aula": "AULA 11",
     "desde": "ABAN BURLES ANGELA DAMARIS",
     "hasta": "BANEGAS URAEZANA DENIXON",
     "total": 300,
@@ -13,6 +16,9 @@
   },
   {
     "mesa": 184,
+    "sede": "SANTA CRUZ",
+    "recinto": "MOD 228",
+    "aula": "AULA 12",
     "desde": "BAPTISTA CHAVEZ MARCOS DAVID",
     "hasta": "CHOQUE SUBELZA ANA IBETH",
     "total": 300,
@@ -25,6 +31,9 @@
   },
   {
     "mesa": 185,
+    "sede": "SANTA CRUZ",
+    "recinto": "MOD 228",
+    "aula": "AULA 13",
     "desde": "CHOQUE ZEGARRA ELVIZ",
     "hasta": "GARCIA ESCOBAR ALEJANDRA FABIOLA",
     "total": 295,
@@ -37,6 +46,9 @@
   },
   {
     "mesa": 186,
+    "sede": "SANTA CRUZ",
+    "recinto": "MOD 228",
+    "aula": "AULA 14",
     "desde": "GARCIA LA FUENTE PAMELA",
     "hasta": "JIMENEZ PARRAGA ALEN",
     "total": 295,
@@ -49,6 +61,9 @@
   },
   {
     "mesa": 187,
+    "sede": "SANTA CRUZ",
+    "recinto": "MOD 228",
+    "aula": "AULA 22",
     "desde": "JIMENEZ RALDES MARIA JOSE",
     "hasta": "MORON PANIAGUA JUAN EDIL",
     "total": 285,
@@ -61,6 +76,9 @@
   },
   {
     "mesa": 188,
+    "sede": "SANTA CRUZ",
+    "recinto": "MOD 228",
+    "aula": "AULA 23",
     "desde": "MORON PEREZ YENNIFER ANGHELYNE",
     "hasta": "RAMIREZ JIMENEZ OLIVER",
     "total": 355,
@@ -73,6 +91,9 @@
   },
   {
     "mesa": 189,
+    "sede": "SANTA CRUZ",
+    "recinto": "MOD 229",
+    "aula": "SALA DE LECTURA 1",
     "desde": "RAMIREZ SALINAS GERALDINE",
     "hasta": "SANCHEZ ANZIETA CAMILA",
     "total": 235,
@@ -85,6 +106,9 @@
   },
   {
     "mesa": 190,
+    "sede": "SANTA CRUZ",
+    "recinto": "MOD 229",
+    "aula": "BIBLIOTECA 2",
     "desde": "SANCHEZ DAVALOS AIDA CELESTE",
     "hasta": "VERASTEGUI MARAÑON ANGELA MAYTE",
     "total": 330,
@@ -97,6 +121,9 @@
   },
   {
     "mesa": 191,
+    "sede": "SANTA CRUZ",
+    "recinto": "MOD 229",
+    "aula": "SALA DE COMPUTO PLANTA ALTA",
     "desde": "VERDUGUEZ AGUILERA LUIS FERNANDO",
     "hasta": "ZURITA QUIMAYA NELVA ESMERALDA",
     "total": 89,

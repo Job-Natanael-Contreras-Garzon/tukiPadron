@@ -178,13 +178,30 @@
           <!-- Dinámico: Verde/Naranja si es jurado, Suave si no es jurado -->
         </div>
 
-        <!-- Badge Gigante de Mesa -->
-        <div class="text-center py-4 bg-gradient-to-br from-[#31A6CA]/10 via-[#35A9C6]/15 to-transparent rounded-2xl border border-[#31A6CA]/20 mb-4">
-          <span class="text-xs font-bold uppercase tracking-wider text-[#31A6CA]">Lugar de Votación</span>
-          <div id="res-mesa" class="text-4xl font-black text-[#EC7D17] tracking-tight mt-0.5">
-            MESA 183
+        <!-- Tarjeta Oficial de Mesa y Recinto (Estilo Oficial UAGRM) -->
+        <div class="rounded-2xl overflow-hidden shadow-md flex mb-4 border border-red-900/20 select-none">
+          <!-- Columna Izquierda: Mesa (Rojo intenso UAGRM) -->
+          <div class="bg-[#99010D] px-4 py-3 flex flex-col items-center justify-center min-w-[80px] text-center border-r border-red-800/40">
+            <span class="text-[10px] font-extrabold uppercase tracking-widest text-white/90">MESA</span>
+            <span id="res-mesa-num" class="text-3xl sm:text-4xl font-black text-white leading-none tracking-tight mt-1">183</span>
           </div>
-          <span class="text-[11px] font-semibold text-slate-500">Facultad de Ciencias Veterinarias</span>
+
+          <!-- Columna Derecha: Recinto, Sede y Aula -->
+          <div class="bg-gradient-to-r from-[#C2091A] to-[#D51022] p-3 sm:p-3.5 flex-1 flex flex-col justify-center min-w-0">
+            <div class="text-[10px] font-extrabold uppercase tracking-wider text-white/90 flex items-center gap-1.5 leading-none">
+              <span>RECINTO</span>
+              <span>·</span>
+              <span id="res-sede">SANTA CRUZ</span>
+            </div>
+            <div id="res-recinto" class="text-xl sm:text-2xl font-black text-white uppercase tracking-tight leading-tight mt-1 mb-1.5">
+              MOD 228
+            </div>
+            <div>
+              <span id="res-aula" class="inline-block bg-white text-[#C2091A] font-extrabold text-[11px] sm:text-xs px-3 py-0.5 rounded-full shadow-xs uppercase tracking-wide truncate max-w-full">
+                AULA 11
+              </span>
+            </div>
+          </div>
         </div>
 
         <!-- Datos del Votante -->

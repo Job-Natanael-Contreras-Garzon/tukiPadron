@@ -193,9 +193,20 @@ function initScreens() {
       }
     }
 
-    // 2. Mesa
-    const mesaEl = document.getElementById('res-mesa')
-    if (mesaEl) mesaEl.textContent = `MESA ${voter.mesa || '183'}`
+    // 2. Mesa y Recinto Oficial UAGRM
+    const mInfo = mesasInfo.find((m) => Number(m.mesa) === Number(voter.mesa))
+
+    const mesaNumEl = document.getElementById('res-mesa-num')
+    if (mesaNumEl) mesaNumEl.textContent = voter.mesa || '183'
+
+    const sedeEl = document.getElementById('res-sede')
+    if (sedeEl) sedeEl.textContent = mInfo?.sede || 'SANTA CRUZ'
+
+    const recintoEl = document.getElementById('res-recinto')
+    if (recintoEl) recintoEl.textContent = mInfo?.recinto || 'MOD 228'
+
+    const aulaEl = document.getElementById('res-aula')
+    if (aulaEl) aulaEl.textContent = mInfo?.aula || 'AULA 11'
 
     // 3. Nombre y Registro
     const nombreEl = document.getElementById('res-nombre')
@@ -241,6 +252,7 @@ function initScreens() {
     if (listEl) {
       listEl.innerHTML = ''
       list.forEach((v) => {
+        const mInfo = mesasInfo.find((m) => Number(m.mesa) === Number(v.mesa))
         const itemBtn = document.createElement('button')
         itemBtn.className = 'w-full text-left p-3.5 rounded-2xl bg-slate-50 hover:bg-[#31A6CA]/10 border border-slate-200 hover:border-[#31A6CA] transition-all flex items-center justify-between group active:scale-[0.99]'
         itemBtn.innerHTML = `
@@ -253,9 +265,12 @@ function initScreens() {
               ${v.esJurado ? '<span class="px-1.5 py-0.2 rounded bg-[#EC7D17] text-white text-[9px] font-black uppercase">Jurado</span>' : ''}
             </div>
           </div>
-          <div class="text-right flex-shrink-0">
+          <div class="text-right flex-shrink-0 flex flex-col items-end gap-1">
             <span class="inline-block px-2.5 py-1 rounded-xl bg-[#31A6CA] text-white text-xs font-black shadow-sm">
               Mesa ${v.mesa}
+            </span>
+            <span class="text-[10px] font-bold text-slate-500">
+              ${mInfo?.recinto || ''} · ${mInfo?.aula || ''}
             </span>
           </div>
         `
@@ -302,10 +317,15 @@ function initAccordion() {
     container.innerHTML = ''
     mesasInfo.forEach((m) => {
       const card = document.createElement('div')
-      card.className = 'p-3 rounded-xl bg-white border border-slate-200 text-xs shadow-xs space-y-1'
+      card.className = 'p-3 rounded-xl bg-white border border-slate-200 text-xs shadow-xs space-y-1.5'
       card.innerHTML = `
         <div class="flex items-center justify-between">
-          <span class="font-extrabold text-[#31A6CA] text-xs">MESA ${m.mesa}</span>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-[#31A6CA] text-xs">MESA ${m.mesa}</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-red-100 text-[#C2091A]">
+              ${m.recinto} · ${m.aula}
+            </span>
+          </div>
           <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600">
             ${m.total} votantes
           </span>
