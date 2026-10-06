@@ -1,4 +1,4 @@
-const CACHE_NAME = 'padron-uv-cache-v1';
+const CACHE_NAME = 'padron-uv-cache-v2';
 
 const STATIC_ASSETS = [
   '/',
@@ -8,17 +8,7 @@ const STATIC_ASSETS = [
   '/icons/icon-192.png',
   '/icons/icon-512.png',
   '/images/logo1.webp',
-  '/images/logo2.webp',
-  '/images/hero-1.webp',
-  '/images/hero-2.webp',
-  '/images/hero-3.webp',
-  '/images/hero-4.webp',
-  '/images/hero-5.webp',
-  '/images/hero-6.webp',
-  '/images/hero-7.webp',
-  '/images/hero-8.webp',
-  '/images/hero-9.webp',
-  '/images/hero-10.webp'
+  '/images/logo2.webp'
 ];
 
 self.addEventListener('install', (event) => {

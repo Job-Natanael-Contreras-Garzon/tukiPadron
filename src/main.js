@@ -37,100 +37,7 @@ function initServiceWorker() {
   }
 }
 
-// --- 2. Carrusel Hero con 10 Imágenes WebP ---
-function initCarousel() {
-  const track = document.getElementById('carousel-track')
-  const dotsContainer = document.getElementById('carousel-dots')
-  const prevBtn = document.getElementById('carousel-prev')
-  const nextBtn = document.getElementById('carousel-next')
-  if (!track) return
-
-  const totalSlides = 10
-  let currentSlide = 0
-  let autoplayTimer = null
-
-  track.innerHTML = ''
-  dotsContainer.innerHTML = ''
-
-  for (let i = 1; i <= totalSlides; i++) {
-    const slide = document.createElement('div')
-    slide.className = 'w-full h-full flex-shrink-0 relative overflow-hidden'
-    slide.innerHTML = `
-      <img
-        src="/images/hero-${i}.webp"
-        alt="Padrón Unidad Veterinaria Banner ${i}"
-        class="w-full h-full object-cover select-none"
-        loading="${i === 1 ? 'eager' : 'lazy'}"
-      />
-    `
-    track.appendChild(slide)
-
-    const dot = document.createElement('button')
-    dot.className = `w-2 h-2 rounded-full transition-all ${i === 1 ? 'bg-white w-5' : 'bg-white/50'}`
-    dot.setAttribute('aria-label', `Ir al slide ${i}`)
-    dot.addEventListener('click', () => goToSlide(i - 1))
-    dotsContainer.appendChild(dot)
-  }
-
-  function updateCarousel() {
-    track.style.transform = `translateX(-${currentSlide * 100}%)`
-    const dots = dotsContainer.querySelectorAll('button')
-    dots.forEach((dot, idx) => {
-      if (idx === currentSlide) {
-        dot.className = 'w-5 h-2 rounded-full bg-white transition-all shadow-sm'
-      } else {
-        dot.className = 'w-2 h-2 rounded-full bg-white/50 transition-all hover:bg-white/80'
-      }
-    })
-  }
-
-  function goToSlide(index) {
-    currentSlide = (index + totalSlides) % totalSlides
-    updateCarousel()
-    resetAutoplay()
-  }
-
-  function nextSlide() {
-    goToSlide(currentSlide + 1)
-  }
-
-  function prevSlide() {
-    goToSlide(currentSlide - 1)
-  }
-
-  prevBtn?.addEventListener('click', prevSlide)
-  nextBtn?.addEventListener('click', nextSlide)
-
-  function startAutoplay() {
-    autoplayTimer = setInterval(nextSlide, 4500)
-  }
-
-  function resetAutoplay() {
-    if (autoplayTimer) clearInterval(autoplayTimer)
-    startAutoplay()
-  }
-
-  startAutoplay()
-
-  // Soporte para gestos táctiles (Swipe)
-  let touchStartX = 0
-  let touchEndX = 0
-
-  track.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX
-  }, { passive: true })
-
-  track.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX
-    const diff = touchStartX - touchEndX
-    if (Math.abs(diff) > 40) {
-      if (diff > 0) nextSlide()
-      else prevSlide()
-    }
-  }, { passive: true })
-}
-
-// --- 3. Flujo de Navegación entre Pantallas Móviles ---
+// --- 2. Flujo de Navegación entre Pantallas Móviles ---
 function initScreens() {
   const appHeader = document.getElementById('app-header')
   const screenHome = document.getElementById('screen-home')
@@ -371,7 +278,7 @@ function initScreens() {
   }
 }
 
-// --- 4. Acordeón de Distribución Oficial de Mesas ---
+// --- 3. Acordeón de Distribución Oficial de Mesas ---
 function initAccordion() {
   const toggleBtn = document.getElementById('accordion-toggle')
   const content = document.getElementById('accordion-content')
@@ -419,7 +326,6 @@ function initAccordion() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initServiceWorker()
-  initCarousel()
   initScreens()
   initAccordion()
 })

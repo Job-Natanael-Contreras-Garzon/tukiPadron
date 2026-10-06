@@ -92,7 +92,7 @@ Para garantizar una distribución equitativa de votantes por mesa, los límites 
 
 La interfaz está construida con la paleta de colores institucional:
 - **Cian Primario (`#31A6CA`)**: Cabecera, acentos y bordes de tarjetas.
-- **Cian Secundario (`#35A9C6`)**: Gradientes suaves en fondos y hero.
+- **Cian Secundario (`#35A9C6`)**: Gradientes suaves en fondos y botones.
 - **Naranja de Acento (`#EC7D17`)**: Botón de búsqueda, banner de Jurado Electoral y badge de Mesa.
 - **Oscuro (`#040304`)**: Tipografía de alto contraste bajo el sol.
 - **Blanco (`#FFFFFF`) y Fondo (`#F1F8FA`)**: Superficies limpias y tarjetas.
@@ -100,7 +100,7 @@ La interfaz está construida con la paleta de colores institucional:
 ### Flujo de Interacción tipo App Móvil:
 1. **Pantalla 1 (Inicio y Consulta)**:
    - **Cabecera oculta**: La cabecera superior permanece oculta al ingresar para maximizar el área de visualización.
-   - **Hero interactivo**: Carrusel táctil (swipe) con **10 imágenes WebP** optimizadas con las mascotas (*Capibara y Caimán*) y motivos de Ciencias Veterinarias.
+   - **Diseño limpio y enfocado**: Acceso directo y prioritario al campo de consulta para máxima rapidez.
    - **Sección "¿No sabes dónde Votar?"**: Campo de entrada con autolimpieza (`✕`) y botón prominente `Buscar` en color naranja.
    - **Acordeón Informativo**: Pestaña desplegable con la tabla completa de distribución de mesas para delegados estudiantiles.
 2. **Transición a Pantalla 2 (Respuesta Exclusiva)**:
@@ -130,7 +130,7 @@ tukiPadron/
 │   ├── sw.js                    # Service Worker con estrategia de caché offline
 │   ├── favicon.svg              # Favicon institucional
 │   ├── icons/                   # Íconos de instalación PWA (192px y 512px)
-│   └── images/                  # Imágenes WebP optimizadas del Hero (hero-1 a hero-10)
+│   └── images/                  # Logotipos WebP institucionales (logo1 y logo2)
 ├── src/
 │   ├── main.js                  # Orquestador de pantallas móviles, eventos y PWA
 │   ├── style.css                # Estilos Tailwind y animaciones de transición
@@ -144,7 +144,7 @@ tukiPadron/
 │       └── registros.json       # Array JSON de números de registro
 └── scripts/
     ├── extract_padron.py        # Extractor desde el PDF oficial
-    ├── prepare_images.py        # Generador de imágenes WebP del hero
+    ├── prepare_images.py        # Generador de logotipos WebP e íconos PWA
     ├── encrypt_padron.py        # Cifrador de la base de datos a AES-256-GCM
     └── test_search.js           # Pruebas automatizadas del motor de búsqueda
 ```
