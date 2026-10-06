@@ -1,4 +1,4 @@
-const CACHE_NAME = 'padron-uv-cache-v2';
+const CACHE_NAME = 'padron-uv-cache-v3';
 
 const STATIC_ASSETS = [
   '/',
@@ -36,8 +36,9 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const request = event.request;
   
-  // Non-GET requests are not cached
+  // Ignorar métodos no GET y esquemas no soportados por Cache API (chrome-extension://, etc.)
   if (request.method !== 'GET') return;
+  if (!request.url.startsWith('http:') && !request.url.startsWith('https:')) return;
 
   event.respondWith(
     caches.match(request).then((cachedResponse) => {
@@ -46,7 +47,7 @@ self.addEventListener('fetch', (event) => {
         fetch(request).then((networkResponse) => {
           if (networkResponse && networkResponse.status === 200) {
             caches.open(CACHE_NAME).then((cache) => {
-              cache.put(request, networkResponse.clone());
+              cache.put(request, networkResponse.clone()).catch(() => {});
             });
           }
         }).catch(() => {});
@@ -61,7 +62,7 @@ self.addEventListener('fetch', (event) => {
 
         const responseToCache = networkResponse.clone();
         caches.open(CACHE_NAME).then((cache) => {
-          cache.put(request, responseToCache);
+          cache.put(request, responseToCache).catch(() => {});
         });
 
         return networkResponse;
