@@ -74,15 +74,15 @@ Para garantizar una distribución equitativa de votantes por mesa, los límites 
 
 | Mesa | Rango de Apellidos | Votantes | Jurados Electorales Designados |
 | :---: | :--- | :---: | :--- |
-| **183** | *ABAN BURLES* a *BANEGAS URAEZANA* | 300 | Aguilar Paniagua M., Antelo Campos R., Balderrama Roncales N. |
-| **184** | *BAPTISTA CHAVEZ* a *CHOQUE SUBELZA* | 300 | Campos Ballesteros I., Cayo Escalera M., Chumacero Copa M. |
-| **185** | *CHOQUE ZEGARRA* a *GARCIA ESCOBAR* | 295 | Cuellar Moreno R., Espinoza Padilla M., Garcia Escobar A. |
-| **186** | *GARCIA LA FUENTE* a *JIMENEZ PARRAGA* | 295 | Garcia Vedia J., Gonzales Hinojosa A., Jimenez Parraga A. |
-| **187** | *JIMENEZ RALDES* a *MORON PANIAGUA* | 285 | Mansilla Nuñez Y., Mendez Garcia M., Moron Paniagua J. |
-| **188** | *MORON PEREZ* a *RAMIREZ JIMENEZ* | 355 | Ocampo Ocampo M., Pereira Rodriguez P., Ramirez Jimenez O. |
-| **189** | *RAMIREZ SALINAS* a *SANCHEZ ANZIETA* | 235 | Rodriguez Trujillo A., Roman Hurtado A., Sanchez Anzieta C. |
-| **190** | *SANCHEZ DAVALOS* a *VERASTEGUI MARAÑON* | 330 | Soliz Martinez M., Suarez Zabala C., Verastegui Marañon A. |
-| **191** | *VERDUGUEZ AGUILERA* a *ZURITA QUIMAYA* | 89 | Villca Almendras J., Villca Rios A., Zurita Quimaya N. |
+| **183** | *ABAN BURLES* a *BARRIOS QUISPE* | 300 | Aguilar Paniagua M., Antelo Campos R., Balderrama Roncales N. |
+| **184** | *BARRON GUTIERREZ* a *CONDE CABRERA* | 300 | Campos Ballesteros I., Cayo Escalera M., Chumacero Copa M. |
+| **185** | *CONDE CUELLAR* a *GARCIA SAAVEDRA* | 300 | Cuellar Moreno R., Espinoza Padilla M., Garcia Escobar A. |
+| **186** | *GARCIA SALAS* a *LOBO ROMERO* | 300 | Garcia Vedia J., Gonzales Hinojosa A., Jimenez Parraga A. |
+| **187** | *LOLA MORENO* a *NUÑEZ SUAREZ* | 300 | Mansilla Nuñez Y., Mendez Garcia M., Moron Paniagua J. |
+| **188** | *OCAMPO OCAMPO* a *RENDON PARAPAINO* | 300 | Ocampo Ocampo M., Pereira Rodriguez P., Ramirez Jimenez O. |
+| **189** | *RENTERIA FRANCO* a *SOLAR GUTIERREZ* | 300 | Rodriguez Trujillo A., Roman Hurtado A., Sanchez Anzieta C. |
+| **190** | *SOLETO MULLISACA* a *VILLALON MONTERO* | 300 | Soliz Martinez M., Suarez Zabala C., Verastegui Marañon A. |
+| **191** | *VILLAMOR CALLE* a *ZURITA QUIMAYA* | 84 | Villca Almendras J., Villca Rios A., Zurita Quimaya N. |
 
 > **Mecanismo de Desambiguación**: Cuando el usuario busca un apellido común o fronterizo (ej. `"CHAVEZ"` presente en Mesas 183 y 184), la aplicación muestra una lista de coincidencias con el nombre completo y la mesa asignada para que el usuario seleccione su registro exacto con un solo tap.
 

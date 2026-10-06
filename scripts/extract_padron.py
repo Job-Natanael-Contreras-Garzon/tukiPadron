@@ -179,15 +179,15 @@ def assign_mesas(records):
     # 190: min 2108, max 2379
     # 191: min 2415, max 2483
     cutoffs = [
-        300,   # Fin Mesa 183 -> 0 a 299 (300 estudiantes)
-        600,   # Fin Mesa 184 -> 300 a 599 (300 estudiantes)
-        895,   # Fin Mesa 185 -> 600 a 894 (295 estudiantes) (corte exacto en GARCIA antes de VEDIA)
-        1190,  # Fin Mesa 186 -> 895 a 1189 (295 estudiantes)
-        1475,  # Fin Mesa 187 -> 1190 a 1474 (285 estudiantes)
-        1830,  # Fin Mesa 188 -> 1475 a 1829 (355 estudiantes)
-        2065,  # Fin Mesa 189 -> 1830 a 2064 (235 estudiantes)
-        2395,  # Fin Mesa 190 -> 2065 a 2394 (330 estudiantes)
-        len(vets) # Fin Mesa 191 -> 2395 a 2483 (89 estudiantes)
+        300,   # Fin Mesa 183 -> 0 a 299 (300 estudiantes) (Hasta: BARRIOS QUISPE JOSE LUIS)
+        600,   # Fin Mesa 184 -> 300 a 599 (300 estudiantes) (Hasta: CONDE CABRERA VERONICA MONSERRAT)
+        900,   # Fin Mesa 185 -> 600 a 899 (300 estudiantes) (Hasta: GARCIA SAAVEDRA DAVID EDUARDO)
+        1200,  # Fin Mesa 186 -> 900 a 1199 (300 estudiantes) (Hasta: LOBO ROMERO ANDREA)
+        1500,  # Fin Mesa 187 -> 1200 a 1499 (300 estudiantes) (Hasta: NUÑEZ SUAREZ NICOLAS)
+        1800,  # Fin Mesa 188 -> 1500 a 1799 (300 estudiantes) (Hasta: RENDON PARAPAINO LICY DOLORES)
+        2100,  # Fin Mesa 189 -> 1800 a 2099 (300 estudiantes) (Hasta: SOLAR GUTIERREZ DAYAN ISANDER)
+        2400,  # Fin Mesa 190 -> 2100 a 2399 (300 estudiantes) (Hasta: VILLALON MONTERO JULIANA)
+        len(vets) # Fin Mesa 191 -> 2400 a 2483 (84 estudiantes) (Hasta: ZURITA QUIMAYA NELVA ESMERALDA)
     ]
 
     for idx, r in enumerate(vets):
