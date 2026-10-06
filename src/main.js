@@ -1,10 +1,16 @@
 import { searchVoters } from './searchEngine.js'
 import mesasInfo from './data/mesas_info.json'
 import { inject } from '@vercel/analytics'
+import { injectSpeedInsights } from '@vercel/speed-insights'
 
 // Inicializar Vercel Analytics
 inject({
   mode: import.meta.env.DEV ? 'development' : 'production',
+})
+
+// Inicializar Vercel Speed Insights
+injectSpeedInsights({
+  debug: import.meta.env.DEV,
 })
 
 // --- 1. Inicialización de Service Worker & Estado Offline ---
