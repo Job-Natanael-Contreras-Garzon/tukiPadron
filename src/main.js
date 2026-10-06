@@ -1,5 +1,11 @@
 import { searchVoters } from './searchEngine.js'
 import mesasInfo from './data/mesas_info.json'
+import { inject } from '@vercel/analytics'
+
+// Inicializar Vercel Analytics
+inject({
+  mode: import.meta.env.DEV ? 'development' : 'production',
+})
 
 // --- 1. Inicialización de Service Worker & Estado Offline ---
 function initServiceWorker() {
